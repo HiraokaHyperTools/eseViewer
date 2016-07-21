@@ -128,6 +128,10 @@ namespace eseViewer {
             VCol vcol = Array.Find(vl.alvcol, delegate(VCol vcol0) { return vcol0.Name == gv.Columns[gv.CurrentCell.ColumnIndex].DataPropertyName; });
             if (vcol == null) return;
             byte[] bin = vcol.GetBin((VRow)gv.CurrentRow.DataBoundItem);
+            DispHex(bin);
+        }
+
+        private void DispHex(byte[] bin) {
             BinForm form = new BinForm();
             StringBuilder str = new StringBuilder();
             int i = 0;
@@ -147,6 +151,7 @@ namespace eseViewer {
             }
             form.tb.Text = str.ToString();
             form.tb.Select(0, 0);
+            WPUt.Center(form, this);
             form.Show();
         }
 
@@ -165,6 +170,7 @@ namespace eseViewer {
             g.SelectedObject = vcol.jci;
             g.Parent = form;
             g.Dock = DockStyle.Fill;
+            WPUt.Center(form, this);
             form.Show();
         }
 
@@ -185,6 +191,7 @@ namespace eseViewer {
             tb.Text = wr.ToString();
             tb.Parent = form;
             tb.Dock = DockStyle.Fill;
+            WPUt.Center(form, this);
             form.Show(this);
         }
 
@@ -207,11 +214,64 @@ namespace eseViewer {
             };
             cbIdx.SelectedIndex = 0;
 
+            WPUt.Center(form, this);
             form.Show();
         }
 
         private void gv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 
+        }
+
+        private void bBookmark_Click(object sender, EventArgs e) {
+            VRow vr = (VRow)gv.CurrentRow.DataBoundItem;
+            if (vr == null) return;
+            DispHex(vr.mark);
+        }
+
+        private void bIndexBins_Click(object sender, EventArgs e) {
+            VList vl = bs.DataSource as VList;
+            if (vl == null) return;
+
+            VRow vr = (VRow)gv.CurrentRow.DataBoundItem;
+            if (vr == null) return;
+
+            StringWriter wr = new StringWriter();
+
+            foreach (IndexBytes ib in vl.GetIndicesByMark(vr)) {
+                wr.WriteLine("--- {0}", ib.ii);
+                wr.WriteLine();
+                wr.WriteLine(BUt.ToHex(ib.idx));
+                wr.WriteLine();
+            }
+
+            BinForm form = new BinForm();
+            form.tb.Text = wr.ToString();
+            form.tb.Select(0, 0);
+            WPUt.Center(form, this);
+            form.Show();
+
+        }
+
+        class BUt {
+            internal static string ToHex(byte[] bin) {
+                StringBuilder str = new StringBuilder();
+                int i = 0;
+                for (int y = 0; i < bin.Length; y++) {
+                    int oi = i;
+                    int x;
+                    for (x = 0; x < 16 && i < bin.Length; x++, i++) {
+                        str.AppendFormat("{0:X2} ", bin[i]);
+                    }
+                    for (; x < 16; x++) str.Append("   ");
+                    i = oi;
+                    for (x = 0; x < 16 && i < bin.Length; x++, i++) {
+                        char c = (char)bin[i];
+                        str.Append((32 <= c && c <= 126) ? c : '.');
+                    }
+                    str.AppendLine();
+                }
+                return str.ToString();
+            }
         }
     }
 }

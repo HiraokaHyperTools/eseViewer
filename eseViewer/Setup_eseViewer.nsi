@@ -23,9 +23,6 @@ InstallDir "$APPDATA\${APP}"
 ; Request application privileges for Windows Vista
 RequestExecutionLevel user
 
-!define DOTNET_VERSION "2.0"
-
-!include "DotNET.nsh"
 !include LogicLib.nsh
 
 ;--------------------------------
@@ -43,12 +40,12 @@ Section "" ;No components page, name is not important
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
 
-  !insertmacro CheckDotNET ${DOTNET_VERSION}
-
   ; Put file there
   File /x "*.vshost.*" "bin\DEBUG\*.*"
   
   Exec '"$INSTDIR\eseViewer.exe"'
+  
+  CreateShortCut "$SMPROGRAMS\eseViewer.lnk" "$INSTDIR\eseViewer.exe"
   
 SectionEnd ; end the section
 

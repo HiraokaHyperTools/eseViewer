@@ -46,6 +46,8 @@
             this.bDetailCol = new System.Windows.Forms.ToolStripButton();
             this.bViewSchema = new System.Windows.Forms.ToolStripButton();
             this.bViewIdx = new System.Windows.Forms.ToolStripButton();
+            this.bBookmark = new System.Windows.Forms.ToolStripButton();
+            this.bIndexBins = new System.Windows.Forms.ToolStripButton();
             this.tsc.ContentPanel.SuspendLayout();
             this.tsc.TopToolStripPanel.SuspendLayout();
             this.tsc.SuspendLayout();
@@ -62,11 +64,11 @@
             // tsc.ContentPanel
             // 
             this.tsc.ContentPanel.Controls.Add(this.gv);
-            this.tsc.ContentPanel.Size = new System.Drawing.Size(709, 372);
+            this.tsc.ContentPanel.Size = new System.Drawing.Size(852, 372);
             this.tsc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsc.Location = new System.Drawing.Point(0, 0);
             this.tsc.Name = "tsc";
-            this.tsc.Size = new System.Drawing.Size(709, 422);
+            this.tsc.Size = new System.Drawing.Size(852, 422);
             this.tsc.TabIndex = 0;
             this.tsc.Text = "toolStripContainer1";
             // 
@@ -82,7 +84,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowTemplate.Height = 21;
-            this.gv.Size = new System.Drawing.Size(709, 372);
+            this.gv.Size = new System.Drawing.Size(852, 372);
             this.gv.TabIndex = 0;
             this.gv.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gv_UserDeletingRow);
             // 
@@ -112,7 +114,7 @@
             this.nav.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.nav.Name = "nav";
             this.nav.PositionItem = this.bindingNavigatorPositionItem;
-            this.nav.Size = new System.Drawing.Size(258, 25);
+            this.nav.Size = new System.Drawing.Size(257, 25);
             this.nav.TabIndex = 0;
             // 
             // bindingNavigatorAddNewItem
@@ -127,7 +129,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(38, 22);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "項目の総数";
             // 
@@ -209,10 +211,12 @@
             this.bViewHex,
             this.bDetailCol,
             this.bViewSchema,
-            this.bViewIdx});
+            this.bViewIdx,
+            this.bBookmark,
+            this.bIndexBins});
             this.tse.Location = new System.Drawing.Point(3, 25);
             this.tse.Name = "tse";
-            this.tse.Size = new System.Drawing.Size(595, 25);
+            this.tse.Size = new System.Drawing.Size(768, 25);
             this.tse.TabIndex = 1;
             // 
             // bChangeEnc
@@ -220,7 +224,7 @@
             this.bChangeEnc.Image = ((System.Drawing.Image)(resources.GetObject("bChangeEnc.Image")));
             this.bChangeEnc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bChangeEnc.Name = "bChangeEnc";
-            this.bChangeEnc.Size = new System.Drawing.Size(201, 22);
+            this.bChangeEnc.Size = new System.Drawing.Size(182, 22);
             this.bChangeEnc.Text = "列の文字列エンコード変更(&E)...";
             this.bChangeEnc.Click += new System.EventHandler(this.bChangeEnc_Click);
             // 
@@ -229,7 +233,7 @@
             this.bViewHex.Image = ((System.Drawing.Image)(resources.GetObject("bViewHex.Image")));
             this.bViewHex.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bViewHex.Name = "bViewHex";
-            this.bViewHex.Size = new System.Drawing.Size(87, 22);
+            this.bViewHex.Size = new System.Drawing.Size(86, 22);
             this.bViewHex.Text = "&Hex表示...";
             this.bViewHex.Click += new System.EventHandler(this.bViewHex_Click);
             // 
@@ -238,7 +242,7 @@
             this.bDetailCol.Image = ((System.Drawing.Image)(resources.GetObject("bDetailCol.Image")));
             this.bDetailCol.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bDetailCol.Name = "bDetailCol";
-            this.bDetailCol.Size = new System.Drawing.Size(95, 22);
+            this.bDetailCol.Size = new System.Drawing.Size(94, 22);
             this.bDetailCol.Text = "列詳細(&D)...";
             this.bDetailCol.Click += new System.EventHandler(this.bDetailCol_Click);
             // 
@@ -247,7 +251,7 @@
             this.bViewSchema.Image = ((System.Drawing.Image)(resources.GetObject("bViewSchema.Image")));
             this.bViewSchema.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bViewSchema.Name = "bViewSchema";
-            this.bViewSchema.Size = new System.Drawing.Size(88, 22);
+            this.bViewSchema.Size = new System.Drawing.Size(77, 22);
             this.bViewSchema.Text = "スキーマ...";
             this.bViewSchema.Click += new System.EventHandler(this.bViewSchema_Click);
             // 
@@ -256,15 +260,33 @@
             this.bViewIdx.Image = ((System.Drawing.Image)(resources.GetObject("bViewIdx.Image")));
             this.bViewIdx.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bViewIdx.Name = "bViewIdx";
-            this.bViewIdx.Size = new System.Drawing.Size(112, 22);
+            this.bViewIdx.Size = new System.Drawing.Size(91, 22);
             this.bViewIdx.Text = "インデックス...";
             this.bViewIdx.Click += new System.EventHandler(this.bViewIdx_Click);
+            // 
+            // bBookmark
+            // 
+            this.bBookmark.Image = ((System.Drawing.Image)(resources.GetObject("bBookmark.Image")));
+            this.bBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bBookmark.Name = "bBookmark";
+            this.bBookmark.Size = new System.Drawing.Size(108, 22);
+            this.bBookmark.Text = "Bookmark bin";
+            this.bBookmark.Click += new System.EventHandler(this.bBookmark_Click);
+            // 
+            // bIndexBins
+            // 
+            this.bIndexBins.Image = ((System.Drawing.Image)(resources.GetObject("bIndexBins.Image")));
+            this.bIndexBins.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bIndexBins.Name = "bIndexBins";
+            this.bIndexBins.Size = new System.Drawing.Size(87, 22);
+            this.bIndexBins.Text = "Index bins";
+            this.bIndexBins.Click += new System.EventHandler(this.bIndexBins_Click);
             // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 422);
+            this.ClientSize = new System.Drawing.Size(852, 422);
             this.Controls.Add(this.tsc);
             this.Name = "TableForm";
             this.Text = "TableForm";
@@ -309,5 +331,7 @@
         private System.Windows.Forms.ToolStripButton bDetailCol;
         private System.Windows.Forms.ToolStripButton bViewSchema;
         private System.Windows.Forms.ToolStripButton bViewIdx;
+        private System.Windows.Forms.ToolStripButton bBookmark;
+        private System.Windows.Forms.ToolStripButton bIndexBins;
     }
 }

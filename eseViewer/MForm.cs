@@ -200,6 +200,7 @@ namespace eseViewer {
                         form.DisconnectEsent();
                         form.Close();
                     };
+                    WPUt.Center(form, this);
                     form.Show();
                 }
             }
@@ -509,5 +510,23 @@ namespace eseViewer {
         }
 
         #endregion
+
+        public IEnumerable<IndexBytes> GetIndicesByMark(VRow vr) {
+            Api.JetGotoBookmark(sesid, tableid, vr.mark, vr.mark.Length);
+            foreach (IndexInfo ii in GetIndices()) {
+                Api.JetSetCurrentIndex(sesid, tableid, ii.Name);
+                yield return new IndexBytes(ii, Api.RetrieveKey(sesid, tableid, RetrieveKeyGrbit.None));
+            }
+        }
+    }
+
+    public class IndexBytes {
+        public IndexInfo ii;
+        public byte[] idx;
+
+        public IndexBytes(IndexInfo ii,byte[] idx) {
+            this.ii = ii;
+            this.idx = idx;
+        }
     }
 }
