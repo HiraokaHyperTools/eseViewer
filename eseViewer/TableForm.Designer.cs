@@ -48,6 +48,10 @@
             this.bViewIdx = new System.Windows.Forms.ToolStripButton();
             this.bBookmark = new System.Windows.Forms.ToolStripButton();
             this.bIndexBins = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bEndEdit = new System.Windows.Forms.ToolStripButton();
+            this.bSelIndex = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsc.ContentPanel.SuspendLayout();
             this.tsc.TopToolStripPanel.SuspendLayout();
             this.tsc.SuspendLayout();
@@ -64,11 +68,11 @@
             // tsc.ContentPanel
             // 
             this.tsc.ContentPanel.Controls.Add(this.gv);
-            this.tsc.ContentPanel.Size = new System.Drawing.Size(852, 372);
+            this.tsc.ContentPanel.Size = new System.Drawing.Size(957, 372);
             this.tsc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsc.Location = new System.Drawing.Point(0, 0);
             this.tsc.Name = "tsc";
-            this.tsc.Size = new System.Drawing.Size(852, 422);
+            this.tsc.Size = new System.Drawing.Size(957, 422);
             this.tsc.TabIndex = 0;
             this.tsc.Text = "toolStripContainer1";
             // 
@@ -79,12 +83,13 @@
             // 
             // gv
             // 
+            this.gv.AllowUserToAddRows = false;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowTemplate.Height = 21;
-            this.gv.Size = new System.Drawing.Size(852, 372);
+            this.gv.Size = new System.Drawing.Size(957, 372);
             this.gv.TabIndex = 0;
             this.gv.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gv_UserDeletingRow);
             // 
@@ -106,6 +111,9 @@
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
+            this.toolStripSeparator1,
+            this.bEndEdit,
+            this.toolStripSeparator2,
             this.bindingNavigatorDeleteItem});
             this.nav.Location = new System.Drawing.Point(3, 0);
             this.nav.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
@@ -114,7 +122,7 @@
             this.nav.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.nav.Name = "nav";
             this.nav.PositionItem = this.bindingNavigatorPositionItem;
-            this.nav.Size = new System.Drawing.Size(257, 25);
+            this.nav.Size = new System.Drawing.Size(339, 25);
             this.nav.TabIndex = 0;
             // 
             // bindingNavigatorAddNewItem
@@ -213,10 +221,11 @@
             this.bViewSchema,
             this.bViewIdx,
             this.bBookmark,
-            this.bIndexBins});
+            this.bIndexBins,
+            this.bSelIndex});
             this.tse.Location = new System.Drawing.Point(3, 25);
             this.tse.Name = "tse";
-            this.tse.Size = new System.Drawing.Size(768, 25);
+            this.tse.Size = new System.Drawing.Size(894, 25);
             this.tse.TabIndex = 1;
             // 
             // bChangeEnc
@@ -282,11 +291,39 @@
             this.bIndexBins.Text = "Index bins";
             this.bIndexBins.Click += new System.EventHandler(this.bIndexBins_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bEndEdit
+            // 
+            this.bEndEdit.Image = ((System.Drawing.Image)(resources.GetObject("bEndEdit.Image")));
+            this.bEndEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bEndEdit.Name = "bEndEdit";
+            this.bEndEdit.Size = new System.Drawing.Size(70, 22);
+            this.bEndEdit.Text = "EndEdit";
+            this.bEndEdit.Click += new System.EventHandler(this.bEndEdit_Click);
+            // 
+            // bSelIndex
+            // 
+            this.bSelIndex.Image = ((System.Drawing.Image)(resources.GetObject("bSelIndex.Image")));
+            this.bSelIndex.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bSelIndex.Name = "bSelIndex";
+            this.bSelIndex.Size = new System.Drawing.Size(126, 22);
+            this.bSelIndex.Text = "Sort by index...";
+            this.bSelIndex.DropDownOpening += new System.EventHandler(this.bSelIndex_DropDownOpening);
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 422);
+            this.ClientSize = new System.Drawing.Size(957, 422);
             this.Controls.Add(this.tsc);
             this.Name = "TableForm";
             this.Text = "TableForm";
@@ -333,5 +370,9 @@
         private System.Windows.Forms.ToolStripButton bViewIdx;
         private System.Windows.Forms.ToolStripButton bBookmark;
         private System.Windows.Forms.ToolStripButton bIndexBins;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton bEndEdit;
+        private System.Windows.Forms.ToolStripDropDownButton bSelIndex;
     }
 }

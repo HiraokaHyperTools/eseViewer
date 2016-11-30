@@ -514,8 +514,33 @@ namespace eseViewer {
         public IEnumerable<IndexBytes> GetIndicesByMark(VRow vr) {
             foreach (IndexInfo ii in GetIndices()) {
                 Api.JetSetCurrentIndex(sesid, tableid, ii.Name);
-                Api.JetGotoBookmark(sesid, tableid, vr.mark, vr.mark.Length);
-                yield return new IndexBytes(ii, Api.RetrieveKey(sesid, tableid, RetrieveKeyGrbit.None));
+                bool avail = false;
+                try {
+                    Api.JetGotoBookmark(sesid, tableid, vr.mark, vr.mark.Length);
+                    avail = true;
+                }
+                catch (EsentNoCurrentRecordException) {
+
+                }
+                yield return new IndexBytes(ii, avail ? Api.RetrieveKey(sesid, tableid, RetrieveKeyGrbit.None) : new byte[0]);
+            }
+        }
+
+        public void SelectIndex(IndexInfo ii) {
+            Api.JetSetCurrentIndex(sesid, tableid, ii.Name);
+            Clear();
+            if (Api.TryMoveFirst(sesid, tableid)) {
+                byte[] tmpMark = new byte[1024];
+                for (int y = 0; ; y++) {
+                    int cbMark = tmpMark.Length;
+                    Api.JetGetBookmark(sesid, tableid, tmpMark, tmpMark.Length, out cbMark);
+
+                    Add(new VRow(y, UtBytea.Cut(tmpMark, 0, cbMark)));
+
+                    if (Api.TryMoveNext(sesid, tableid))
+                        continue;
+                    break;
+                }
             }
         }
     }

@@ -127,7 +127,7 @@ namespace eseViewer {
             if (vl == null) return;
             VCol vcol = Array.Find(vl.alvcol, delegate(VCol vcol0) { return vcol0.Name == gv.Columns[gv.CurrentCell.ColumnIndex].DataPropertyName; });
             if (vcol == null) return;
-            byte[] bin = vcol.GetBin((VRow)gv.CurrentRow.DataBoundItem);
+            byte[] bin = vcol.GetBin((VRow)gv.CurrentRow.DataBoundItem) ?? new byte[0];
             DispHex(bin);
         }
 
@@ -271,6 +271,27 @@ namespace eseViewer {
                     str.AppendLine();
                 }
                 return str.ToString();
+            }
+        }
+
+        private void bEndEdit_Click(object sender, EventArgs e) {
+            bs.EndEdit();
+        }
+
+        private void bSelIndex_DropDownOpening(object sender, EventArgs e) {
+            VList vl = bs.DataSource as VList;
+            if (vl == null) return;
+
+            VRow vr = (VRow)gv.CurrentRow.DataBoundItem;
+            if (vr == null) return;
+
+            bSelIndex.DropDownItems.Clear();
+
+            foreach (IndexInfo _ii in vl.GetIndices()) {
+                IndexInfo ii = _ii;
+                bSelIndex.DropDownItems.Add(ii.ToString(), null, delegate {
+                    vl.SelectIndex(ii);
+                });
             }
         }
     }
